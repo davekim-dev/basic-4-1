@@ -264,7 +264,19 @@ document.documentElement.setAttribute('data-theme', 'dark');
 
 ### 4.2 박스 모델과 `box-sizing`
 
-모든 요소는 안쪽부터 `content → padding → border → margin` 의 상자입니다.
+box = 요소(시맨텍 테그 애들)들에 의해 레이아웃을 걸쳐 만들어진 결과.. 즉, css가 만든 모든 결과물
+
+"article" 이라는 요소 안에 box들이 여러개 들어가 있을 수 있음!
+
+로고로 예를 들면, 
+```<img src="logo.svg">``` 하나면 박스 1개, 
+
+```<div><img><span>Codyssey</span></div>```면 박스 3개
+
+
+모든 요소는 안쪽부터 `content(실제 내용) → padding(안쪽 여백) → border(테두리) → margin(다른 박스와 구별선 - 밀어내는 여백)` 의 상자입니다.
+
+사실상 디자인 요소임. 어디까지가 내용이고 여백을 어떻게 할 것이고 다른 박스와 구별되는 바운더리를 어떻게 만들 것인가.
 
 ```css
 * {
@@ -355,6 +367,12 @@ Projects 섹션 (Grid) → 카드 배치
   └ 카드 하나 (Flex, column) → 제목 / 설명 / 하단 메타정보 세로 배치
       └ 메타정보 줄 (Flex, row) → 언어 · 별 개수 가로 배치
 ```
+
+실무에서는 "gird로 레이아웃 셀을 지정하고 셀 안을 flexbox로 채운다."  
+- 요소들을 페이지 어디에 얼마나 놓을 것인가 -> **Grid**
+- 그 요소들의 자식 box- item을 어떻게 늘어놓을 것인가 -> **Flexbox**
+
+사실 gird로 안쪽도 만들어도 되긴 하는데,,, gird(바깥) - gird(안) 겹치면 중첩문제 발생,,, subgrid 사용해야  +  유지보수 문제가 들어간다고..
 
 ### 4.6 반응형 디자인과 모바일 퍼스트
 

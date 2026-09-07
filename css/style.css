@@ -1,0 +1,503 @@
+/* ==========================================================================
+   CSS 변수
+   ========================================================================== */
+:root {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f6fa;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-primary: #4361ee;
+  --color-primary-dark: #3247c4;
+  --color-border: #e0e0e0;
+  --color-card-bg: #ffffff;
+  --color-header-bg: rgba(255, 255, 255, 0.85);
+  --color-error: #e63946;
+  --color-success: #2a9d8f;
+
+  --font-base: "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.15);
+  --transition: 0.5s ease;
+}
+
+[data-theme="dark"] {
+  --color-bg: #12131a;
+  --color-bg-alt: #1b1d29;
+  --color-text: #f0f0f0;
+  --color-text-muted: #b0b0b8;
+  --color-primary: #7c93ff;
+  --color-primary-dark: #5c73e0;
+  --color-border: #2c2e3c;
+  --color-card-bg: #1e2030;
+  --color-header-bg: rgba(18, 19, 26, 0.85);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================================================
+   리셋 & 기본
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+.section__title {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+section {
+  padding: var(--space-lg) 0;
+  scroll-margin-top: 64px;
+}
+
+/* ==========================================================================
+   버튼
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   헤더 / 네비게이션 (Flexbox)
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: transparent;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.header.scrolled {
+  background-color: var(--color-header-bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav__logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav__link {
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.nav__toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.nav__toggle-bar {
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* 모바일: 메뉴 숨김 + 햄버거 표시 */
+.nav__menu {
+  position: fixed;
+  top: 64px;
+  right: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  background-color: var(--color-bg);
+  width: 200px;
+  padding: var(--space-md);
+  box-shadow: var(--shadow);
+  transform: translateX(100%);
+  transition: transform var(--transition);
+}
+
+.nav__menu.active {
+  transform: translateX(0);
+}
+
+.nav__toggle.active .nav__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav__toggle.active .nav__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle.active .nav__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 64px;
+}
+
+.hero__greeting {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+}
+
+.hero__name {
+  font-size: 2.5rem;
+  margin: var(--space-xs) 0;
+}
+
+.hero__tagline {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+.about__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.about__photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
+/* ==========================================================================
+   Skills
+   ========================================================================== */
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+.skill__item {
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* ==========================================================================
+   Projects (Grid)
+   ========================================================================== */
+.projects__status {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.project-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.project-card__title {
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.project-card__desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xs);
+}
+
+.project-card__meta {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.retry-btn {
+  display: block;
+  margin: var(--space-sm) auto 0;
+}
+
+/* ==========================================================================
+   Contact / Form
+   ========================================================================== */
+.contact__form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form__group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form__group input,
+.form__group textarea {
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.form__error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  min-height: 1em;
+}
+
+.form__success {
+  color: var(--color-success);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  background-color: var(--color-bg-alt);
+  padding: var(--space-md) 0;
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.footer__socials {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.footer__socials a:hover {
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Scroll to top
+   ========================================================================== */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   스크롤 애니메이션 (IntersectionObserver 대상)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   반응형: 태블릿 (768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__menu {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    transform: none;
+  }
+
+  .about__content {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .hero__name {
+    font-size: 3.2rem;
+  }
+}
+
+/* ==========================================================================
+   반응형: 데스크톱 (1024px)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .hero__name {
+    font-size: 3.75rem;
+  }
+}

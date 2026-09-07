@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#hero" class="nav__logo">YourName</a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="다크 모드 전환">
+            🌙
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="hero">
+      <div class="container hero__content">
+        <p class="hero__greeting">Hello, I am</p>
+        <h1 class="hero__name">Your Name</h1>
+        <p class="hero__tagline">Frontend Developer / Web Enthusiast</p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary">View Projects</a>
+          <a href="#contact" class="btn btn--secondary">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section__title">About Me</h2>
+        <div class="about__content">
+          <img
+            src="images/profile.jpg"
+            alt="Your Name의 프로필 사진"
+            class="about__photo"
+          />
+          <div class="about__text">
+            <p>
+              안녕하세요, 저는 [자기소개를 여기에 작성하세요]. HTML, CSS, JavaScript를
+              공부하며 웹이 동작하는 원리를 배우고 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills" id="skills">
+      <div class="container">
+        <h2 class="section__title">Skills</h2>
+        <ul class="skills__list">
+          <li class="skill__item">HTML5</li>
+          <li class="skill__item">CSS3</li>
+          <li class="skill__item">JavaScript (ES6+)</li>
+          <li class="skill__item">Git / GitHub</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="container">
+        <h2 class="section__title">Projects</h2>
+        <div class="projects__status" id="projects-status" aria-live="polite"></div>
+        <div class="projects__grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section__title">Contact</h2>
+        <form class="contact__form" id="contact-form" novalidate>
+          <div class="form__group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+            <span class="form__error" id="name-error"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
+            <span class="form__error" id="email-error"></span>
+          </div>
+
+          <div class="form__group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <span class="form__error" id="message-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn--primary">Send</button>
+          <p class="form__success" id="form-success" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__content">
+      <p>&copy; 2026 Your Name. All rights reserved.</p>
+      <div class="footer__socials">
+        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="맨 위로 이동">↑</button>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
