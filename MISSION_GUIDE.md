@@ -848,6 +848,45 @@ fetch(url)
   .catch((err) => showError(err));
 ```
 
+``` promise는 fetch()를 통해 비동기로 계산될 함수값들이 들어올 상자임!!
+
+- promise를 1번 사용
+1. fetch() 통해서 비동기
+
+2. promise객체 생성 - Pending 상태
+
+3. 외부에서 함수 계산 끝
+
+4. promise에 함수값 - Fulfilled 상태
+
+5. 콜백을 큐에 넣음
+
+6. 큐 순서가 되면 콜백값을 promise에서 꺼냄
+
+- promise를 2번 사용 (체이닝 .then())
+<외부에서 데이터를 받아와서 비동기로 함수값을 구해야할 때 -- 값 정제해서 구하는 느낌>
+1. fetch() 호출: Promise #1 생성 (Pending).
+  첫 번째 .then() 호출:
+  새로운 Promise #2 생성 (Pending).
+  첫 번째 콜백이 Promise #1에 등록됩니다.
+
+2. 두 번째 .then() 호출:
+  새로운 Promise #3 생성 (Pending).
+  두 번째 콜백이 Promise #2에 등록됩니다.
+
+3. 동기 코드 완료 후 네트워크 응답 도착:
+  Promise #1 상태가 Fulfilled로 바뀜 (Response 저장).
+  첫 번째 콜백이 Microtask Queue로 들어갑니다.
+
+4.첫 번째 콜백 실행:
+  이벤트 루프에 의해 첫 번째 콜백이 실행되어 response.json()을 리턴합니다.
+  response.json() 역시 비동기 작업이므로, 이 작업이 완료되면 Promise #2가 Fulfilled로 바뀌고 파싱된 JSON 데이터가 담깁니다.
+
+5. 두 번째 콜백으로 연쇄 전달:
+  Promise #2가 완료되었으므로, 두 번째 콜백이 Microtask Queue로 들어갑니다.
+  두 번째 콜백이 실행되면서 Promise #2의 데이터(JSON)를 인자로 받아서 화면 업데이트(DOM 조작) 등을 수행하고 Promise #3이 Fulfilled가 됩니다.
+```
+
 ### 6.3 async / await
 
 `async/await`는 Promise를 **동기 코드처럼 위에서 아래로 읽히게** 만드는 문법 설탕입니다.
